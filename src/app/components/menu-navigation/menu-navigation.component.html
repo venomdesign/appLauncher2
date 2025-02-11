@@ -1,0 +1,116 @@
+<header id="header">
+  <div class="container">
+      <div class="wrapper">
+          <div id="logo" class="d-flex align-items-center">
+              <a href="index.html" aria-label="USLI Main" class="text-decoration-none text-white">
+                  <h1><img src="/images/USLILogo-light.svg" class="me-1" alt="USLI Logo"> Main</h1>
+                  <span id="menu-switch" class="icon-arrow-down"></span>
+              </a>
+          </div>
+          <nav id="menu">
+              <ul>
+                  <li>
+                    <!-- <a href="#" (click)="showUtilities()" aria-label="Click here to go to utilities"><i class="bi bi-gear me-1"></i> Utilities</a> -->
+                    <button class="menu-button" [class.active]="isUtilitiesActive" (click)="showUtilities()"><i class="bi bi-gear me-1"></i> Utilities</button>
+                  </li>
+              </ul>
+          </nav>
+      </div>
+  </div>
+</header>
+<nav class="menu-navigation">
+    <div class="main-menu d-flex flex-column">
+        <div class="d-flex gap-2 align-items-center justify-content-center mb-2">
+            <button
+                class="menu-button"
+                [class.active]="isAllLinksActive"
+                (click)="showAllLinks()">
+                All
+            </button>
+
+        </div>
+        <div class="d-flex gap-2 align-items-center justify-content-center">
+            <button
+                *ngFor="let item of mainMenuItems"
+                class="menu-button"
+                [class.active]="activeMenuId === item.MenuID"
+                (click)="showSection(item.MenuID)">
+                {{ item.Description }}
+            </button>
+        </div>
+    </div>
+
+    <div class="container" *ngIf="displayedItems.length > 0">
+        <div class="row">
+            <div class="col-12">
+                <!-- Headers section -->
+                <h2 class="border-bottom border-dark border-4 pb-2 w-100 mb-4" *ngIf="isUtilitiesActive">Utilities</h2>
+                <h2 class="border-bottom border-dark border-4 pb-2 w-100 mb-4" *ngIf="activeMenuId === 4">Hospitality and Liquor</h2>
+                <h2 class="border-bottom border-dark border-4 pb-2 w-100 mb-4" *ngIf="activeMenuId === 33">Non Profit</h2>
+                <h2 class="border-bottom border-dark border-4 pb-2 w-100 mb-4" *ngIf="activeMenuId === 6">Personal</h2>
+                <h2 class="border-bottom border-dark border-4 pb-2 w-100 mb-4" *ngIf="activeMenuId === 7">Professional</h2>
+                <h2 class="border-bottom border-dark border-4 pb-2 w-100 mb-4" *ngIf="activeMenuId === 9">Regional Teams</h2>
+                <h2 class="border-bottom border-dark border-4 pb-2 w-100 mb-4" *ngIf="activeMenuId === 10">Private Label</h2>
+                <h2 class="border-bottom border-dark border-4 pb-2 w-100 mb-4" *ngIf="activeMenuId === 181">Instant Access</h2>
+                <h2 class="border-bottom border-dark border-4 pb-2 w-100 mb-4" *ngIf="isAllLinksActive">USLI MAIN</h2>
+
+                <!-- Location-based sections -->
+                <div class="row" *ngIf="!isUtilitiesActive">
+                    <!-- Location 3 -->
+                    <div class="col-md-4">
+                        <div class="submenu-items">
+                            <div *ngFor="let item of displayedItems | locationFilter:3" class="submenu-item">
+                                <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center">
+                                    {{ item.Description }} <i class="bi bi-arrow-right-circle-fill fs-4"></i>
+                                </a>
+                                <span *ngIf="!item.CommandLine" class="submenu-text">
+                                    {{ item.Description }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location 4 -->
+                    <div class="col-md-4">
+                        <div class="submenu-items">
+                            <div *ngFor="let item of displayedItems | locationFilter:4" class="submenu-item">
+                                <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center">
+                                    {{ item.Description }} <i class="bi bi-arrow-right-circle-fill fs-4"></i>
+                                </a>
+                                <span *ngIf="!item.CommandLine" class="submenu-text">
+                                    {{ item.Description }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location 5 -->
+                    <div class="col-md-4">
+                        <div class="submenu-items">
+                            <div *ngFor="let item of displayedItems | locationFilter:5" class="submenu-item">
+                                <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center">
+                                    {{ item.Description }} <i class="bi bi-arrow-right-circle-fill fs-4"></i>
+                                </a>
+                                <span *ngIf="!item.CommandLine" class="submenu-text">
+                                    {{ item.Description }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Utilities section -->
+                <div class="submenu-items" *ngIf="isUtilitiesActive">
+                    <div *ngFor="let item of displayedItems" class="submenu-item">
+                        <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center">
+                            {{ item.Description }} <i class="bi bi-arrow-right-circle-fill fs-4"></i>
+                        </a>
+                        <span *ngIf="!item.CommandLine" class="submenu-text">
+                            {{ item.Description }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
